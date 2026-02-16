@@ -142,9 +142,7 @@ async function handlingDeleteComment(commentId){
                             />
                             <button type="submit" className="comment-button">Post</button>
                       </form>
-                 <div className = "Views">
-                 Views : {article.views}
-                 </div>
+
                 </div>
             </div>
     )
