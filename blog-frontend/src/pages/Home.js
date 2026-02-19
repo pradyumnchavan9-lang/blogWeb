@@ -30,53 +30,53 @@ function Home() {
 
     const isLoggedIn = !!localStorage.getItem("token");
 
-  return(
-             <div>
-               <h1>Home</h1>
-                    {isLoggedIn ? (
-                          <>
-                                <button onClick={logout}>Logout</button>{" "}
-                                <Link to="/profile">
-                                  <button>Profile</button>
-                                </Link>
-                              </>
-                            ) : (
-                              <>
-                                <a href="/login">Login</a> | <a href="/register">Register</a>
-                          </>
-                    )}
+  return (
+    <div className="home-wrapper">
 
-                {isLoggedIn && (
-                  <>
-                    <br /><br />
-                    <a href="/articles/new">Create Article</a>
-                  </>
-                )}
+      <nav className="navbar">
+        <h1 className="logo">DevArticles</h1>
 
-               <hr />
+        <div className="nav-actions">
+          {isLoggedIn ? (
+            <>
+              <Link to="/articles/new" className="nav-link">Create</Link>
+              <Link to="/profile" className="nav-link">Profile</Link>
+              <button onClick={logout} className="logout-btn">Logout</button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="nav-link">Login</Link>
+              <Link to="/register" className="nav-link primary">Register</Link>
+            </>
+          )}
+        </div>
+      </nav>
 
-               <div className = "container">
-               <h2>Articles</h2>
+      <div className="container">
+        <h2 className="section-title">Latest Articles</h2>
 
-               <ul>
-                    {articles.map(article => (
-                        <li className = "article-card" key = {article.id}>
-                                <h3>
-                                    <a href = {`/articles/${article.id}`}>{article.title}
-                                    </a>
-                                </h3>
-                                <p className = "article-meta">
-                                    Author Name:-{article.author.username}<br></br>
-                                    Difficulty • {article.difficulty}
-                                </p>
-                                <p>{article.summary}</p>
-                        </li>
-                    ))}
+        <ul className="articles-list">
+          {articles.map(article => (
+            <li className="article-card" key={article.id}>
+              <Link to={`/articles/${article.id}`} className="article-title">
+                {article.title}
+              </Link>
 
-               </ul>
-                </div>
-             </div>
-         );
+              <p className="article-meta">
+                By <strong>{article.author.username}</strong> • {article.difficulty}
+              </p>
+
+              <p className="article-summary">
+                {article.summary}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  );
+
 }
 
 export default Home;

@@ -39,6 +39,8 @@ function Register() {
     return (
         <div className = "register-container">
             <div className = "register-card">
+                <h2>Create Account</h2>
+
                 {success && <div className = "register-success">{success}</div>}
                 {error && <div className = "register-error">{error}</div>}
                 <form onSubmit = {handleSubmit}>
